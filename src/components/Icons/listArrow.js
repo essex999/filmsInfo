@@ -1,4 +1,4 @@
-function ListArrow(props) {
+function ListArrowIcon(props) {
 	return (
 		<svg
 			style={{ transform: 'rotate(90deg) ' }}
@@ -13,4 +13,4 @@ function ListArrow(props) {
 	)
 }
 
-export default ListArrow
+export default ListArrowIcon

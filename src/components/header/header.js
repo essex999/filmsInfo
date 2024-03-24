@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { categories } from '../../consts'
 import IconArrowDropDownLine from '../Icons/arrowElectronIcon'
 import {
 	CategoryButton,
@@ -11,14 +12,16 @@ import {
 } from './headerStyles'
 import { NavSubMenu } from './navSubMenu/navSubMenu'
 export const Header = () => {
-	const categories = ['Фильмы', 'Сериалы', 'Мультфильмы', 'Аниме']
-
 	const [isToggle, setToggle] = useState(true)
 	const [isFocused, setFocused] = useState({})
 	const placeholderValue = 'Поиск Фильмов и Сериалов'
-
+	const [isNavSubMenu, setIsNavSubMenu] = useState(false)
 	return (
-		<HeaderMain>
+		<HeaderMain
+			onMouseLeave={e => {
+				setIsNavSubMenu(false)
+			}}
+		>
 			<HeaderLogo></HeaderLogo>
 			<HeaderNav>
 				<HeaderButtonsGroup>
@@ -26,6 +29,7 @@ export const Header = () => {
 						<CategoryButton
 							onMouseOver={e => {
 								setFocused({ focused: true, index: index })
+								setIsNavSubMenu(true)
 							}}
 							onMouseLeave={e => {
 								setFocused({ focused: false, index: index })
@@ -51,7 +55,7 @@ export const Header = () => {
 					/>
 				</HeaderInputGroup>
 			</HeaderNav>
-			<NavSubMenu />
+			<NavSubMenu show={isNavSubMenu} />
 		</HeaderMain>
 	)
 }

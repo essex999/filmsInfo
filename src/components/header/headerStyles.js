@@ -20,6 +20,7 @@ export const HeaderNav = styled.div`
 `
 
 export const HeaderButtonsGroup = styled.div`
+	gap: 10px;
 	display: flex;
 `
 
