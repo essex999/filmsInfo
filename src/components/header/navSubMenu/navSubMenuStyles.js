@@ -86,6 +86,9 @@ export const YearElement = styled.div`
 `
 
 export const NavSearchButton = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 	background-color: #00a0b0;
 	border: 1px solid #0098a7;
 	border-radius: 3px;
@@ -96,4 +99,6 @@ export const NavSearchButton = styled.button`
 	vertical-align: middle;
 	cursor: pointer;
 	padding: 11px 10px 11px 10px;
+	height: 40px;
+	width: 86px;
 `

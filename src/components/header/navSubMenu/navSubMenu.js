@@ -1,7 +1,11 @@
 import { useRef, useState } from 'react'
 import { useMutation } from 'react-query'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { ReactComponent as LoadIcon } from '../../../assets/Rolling-1.2s-24px.svg'
 import { genres } from '../../../consts'
 import { getMovieByParams } from '../../../query/api'
+import { setData } from '../../../redux/slicers/rednerData'
 import ListArrowIcon from '../../Icons/listArrow'
 import {
 	ButtonGroup,
@@ -15,18 +19,24 @@ import {
 	NavSubMenuGroupGenres,
 	YearElement,
 } from './navSubMenuStyles'
-
 export const NavSubMenu = props => {
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const page = useSelector(state => state.searchMovieParams.page)
 	const [genre, setGenre] = useState('')
 	const [year, setYear] = useState('За все время')
 	const [isShowList, setIshowList] = useState(false)
 
 	const getMovie = useMutation(
 		['getMovie'],
-		(year, genre) => getMovieByParams(year, genre),
+		(year, genre, page) => getMovieByParams(year, genre, page),
 		{
 			onSuccess: data => {
-				console.log(data)
+				dispatch(setData(data.data))
+				if (data) {
+					navigate(`/movies/${data.data.page}`)
+					console.log(data.data)
+				}
 			},
 		}
 	)
@@ -94,7 +104,15 @@ export const NavSubMenu = props => {
 						getMovieHandleCLick()
 					}}
 				>
-					Поехали!
+					{getMovie.isLoading ? (
+						<LoadIcon
+							style={{
+								backgroundColor: 'transparent',
+							}}
+						/>
+					) : (
+						'Поехали!'
+					)}
 				</NavSearchButton>
 			</NavSubMenuGroupFilter>
 		</NavSubMenuGroup>
