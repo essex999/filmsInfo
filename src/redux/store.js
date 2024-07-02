@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import searchedMoviesData from './slicers/rednerData.js'
+import searchMovieParamsSlicer from './slicers/searchMovieParamsSlicer'
 export const store = configureStore({
-	reducer: { searchMovieParams: searchedMoviesData },
+	reducer: { searchParams: searchMovieParamsSlicer },
 })

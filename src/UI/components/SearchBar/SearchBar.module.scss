@@ -1,30 +1,26 @@
-import styled from 'styled-components'
-
-export const HeaderMain = styled.div`
-	height: 80px;
+.HeaderMain {
 	width: 100%;
-	background-color: #222d33;
-`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
-export const HeaderLogo = styled.div`
-	height: 40px;
-	width: 100%;
-	background-color: #060f13;
-`
-export const HeaderNav = styled.div`
+.HeaderNav {
 	height: 40px;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-`
+	background-color: #778da9;
+}
 
-export const HeaderButtonsGroup = styled.div`
+.HeaderButtonsGroup {
 	gap: 10px;
 	display: flex;
-`
+	height: 100%;
+}
 
-export const CategoryButton = styled.button`
+.CategoryButton {
 	color: #ffffff;
 
 	border: none;
@@ -38,9 +34,9 @@ export const CategoryButton = styled.button`
 		text-decoration: underline;
 		cursor: pointer;
 	}
-`
-export const HeaderInputGroup = styled.div``
-export const HeaderInput = styled.input`
+}
+
+.HeaderInput {
 	border: none;
 	outline: none;
 	background-color: transparent;
@@ -53,4 +49,4 @@ export const HeaderInput = styled.input`
 		color: #bdc0c2;
 		text-align: center;
 	}
-`
+}

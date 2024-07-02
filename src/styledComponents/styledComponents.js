@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-
 export const MainWrapper = styled.div`
-	background-color: #09161c;
+	background-color: #597445;
 	width: 1000px;
 	min-height: 100%;
 `
@@ -9,7 +8,7 @@ export const MainWrapper = styled.div`
 export const Bar = styled.div`
 	margin-left: 10px;
 	width: 200px;
-	background-color: #1c1c1c;
+	background-color: #e7f0dc;
 	margin: 20px;
 	box-sizing: border-box;
 	height: 586px;
