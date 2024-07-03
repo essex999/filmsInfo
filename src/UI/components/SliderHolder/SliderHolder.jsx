@@ -1,69 +1,59 @@
-
 import React from "react"
-import styles from "./SliderHolder.module.scss"
-export const SliderHolder = () => {
-  const data = [
-    {
-      img: "https://cdn.pixabay.com/photo/2018/03/29/07/42/europe-3271588_1280.jpg",
-      name: "Нечто. Новый вид",
-      info: "2024, США, Боевики",
-    },
-    {
-      img: "https://cdn.pixabay.com/photo/2018/03/29/07/42/europe-3271588_1280.jpg",
-      name: "Нечто. Новый вид",
-      info: "2024, США, Боевики",
-    },
-    {
-      img: "https://cdn.pixabay.com/photo/2018/03/29/07/42/europe-3271588_1280.jpg",
-      name: "Нечто. Новый вид",
-      info: "2024, США, Боевики",
-    },
-    {
-      img: "https://cdn.pixabay.com/photo/2018/03/29/07/42/europe-3271588_1280.jpg",
-      name: "Нечто. Новый вид",
-      info: "2024, США, Боевики",
-    },
-    {
-      img: "https://cdn.pixabay.com/photo/2018/03/29/07/42/europe-3271588_1280.jpg",
-      name: "Нечто. Новый вид",
-      info: "2024, США, Боевики",
-    },
-  ];
+import Slider from "react-slick"
+import "slick-carousel/slick/slick-theme.css"
+import "slick-carousel/slick/slick.css"
+import { NextArrow } from './Arrows/NextArrow'
+import { PrevArrow } from './Arrows/PrevArrow'
+import styles from './SliderHolder.module.scss'
+export default function SliderHolder() {
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.slider_wrapper}>
-        <div className={styles.card_item}>
-          <img src="" alt="" />
-          <p></p>
-          <p></p>
-        </div>
-        <div className={styles.card_item}>
-          <img src="" alt="" />
-          <p></p>
-          <p></p>
-        </div>
-        <div className={styles.card_item}>
-          <img src="" alt="" />
-          <p></p>
-          <p></p>
-        </div>
-        <div className={styles.card_item}>
-          <img src="" alt="" />
-          <p></p>
-          <p></p>
-        </div>
-        <div className={styles.card_item}>
-          <img src="" alt="" />
-          <p></p>
-          <p></p>
-        </div>
-        <div className={styles.card_item}>
-          <img src="" alt="" />
-          <p></p>
-          <p></p>
-        </div>
-      </div>
+  const mockData = [
+    "John Doe",
+    "Jane Smith",
+    "Michael Johnson",
+    "Emily Brown",
+    "David Williams",
+    "Jessica Davis",
+    "Daniel Martinez",
+    "Sarah Wilson",
+    "Christopher Garcia",
+    "Lisa Miller"
+];
+
+
+
+
+
+  let settings = {
+    dots: true,
+    infinite: true,
+   
+    slidesToShow: 4,
+    slidesToScroll: 2,
+    autoplay:true,
+    speed:400,//milliseconds
+    autoplaySpeed:3000, //milliseconds
+    nextArrow:<NextArrow/>,  // custom arrows
+    prevArrow:<PrevArrow/>
+    
+  };
+  return ( 
+    
+   <div className={styles.sliderWrapper}> 
+    <div className={`${"slider-container"} ${styles.sliderContainer}`}>
+    <Slider {...settings} className={styles.slider}>
+      {mockData.map((el,index)=>
+        (<div  key={index}>
+          <div className={styles.sliderElement}>
+          <div className={styles.sliderImg}>
+            
+            </div>
+          </div>
+          </div>)
+      )}
+
+    </Slider>
+    </div>
     </div>
   );
-};
+}

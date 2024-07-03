@@ -1,0 +1,31 @@
+
+
+.common{
+	font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.nextArrow{
+	color:white ;
+	 
+	right: -25px;
+}
+.prevArrow{
+	 color:white  ;
+	 
+	 left: -25px;
+}
+.transform{
+	transform: rotate(180deg);
+}
