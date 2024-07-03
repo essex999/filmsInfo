@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { QueryClientProvider } from 'react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { Provider } from 'react-redux'
+import { Home } from './UI/screens/home/home'
 import { queryClient } from './query/queryClient'
 import { store } from './redux/store'
-import { Home } from './screens/home/home'
 function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
