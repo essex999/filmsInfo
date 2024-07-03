@@ -1,0 +1,28 @@
+ .sliderWrapper{
+ 
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+ }
+ 
+ .sliderContainer{
+	width: 90%;
+
+ }
+ 
+ 
+
+.sliderElement{
+ 
+ 
+	height: 200px;
+	 display: flex;
+	 justify-content: center;
+ align-items: center;
+}
+
+.sliderImg{
+border: 1px solid black;
+ height: 80%;
+ width: 80%;
+}
