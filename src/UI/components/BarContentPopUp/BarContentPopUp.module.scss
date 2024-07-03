@@ -1,106 +1,139 @@
-.NavSubMenuGroup {
-	position: absolute;
-	height: auto;
-	width: 68vw;
-	background-color: #778da9;
-	top: 40px;
-	padding: 20px;
-	padding-bottom: 80px;
 
-	box-shadow: inset 0px 4px 7px -2px rgba(0, 0, 0, 1);
+ 
+@keyframes scale_up_ver_top {
+  0% {
+    -webkit-transform: scaleY(0.4);
+    transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+		opacity: 0%;
+  }
+	50%{
+		opacity: 20%;
+	}
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+
+  }
+}
+
+.scale_up_ver_top {
+ 
+  animation: scale_up_ver_top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.NavSubMenuGroup {
+  position: absolute;
+  height: auto;
+  width: 68vw;
+  background-color: #778da9;
+  top: 40px;
+  padding: 20px;
+  //   padding-bottom: 80px;
+
+  box-shadow: inset 0px 4px 7px -2px rgba(0, 0, 0, 1);
 }
 
 .NavSubMenuGroupGenres {
-	display: grid;
-	justify-items: center;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(8, 1fr);
-	grid-column-gap: 0px;
-	grid-row-gap: 20px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
 }
 .NavSubMenuGroupFilter {
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	margin-bottom: 20px;
-	margin-right: 140px;
-	display: flex;
-	gap: 120px;
-	flex-direction: row;
-	align-items: flex-end;
+  //   position: absolute;
+  //   bottom: 0px;
+  //   right: 0px;
+  //   margin-bottom: 20px;
+  //   margin-right: 140px;
+  display: flex;
+  //   gap: 120px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+  //   align-items: flex-end;
 }
 .NavSubMenuGroupFilterSelectButton {
-	width: 100%;
-	padding: 10px;
-	border: 2px solid #0a8b98;
-	color: white;
-	background-color: black;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #0a8b98;
+  color: white;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 }
 .NavSubMenuGroupButton {
-	color: #ffffff;
+  color: #ffffff;
 
-	border: none;
-	outline: none;
-	background-color: transparent;
+  border: none;
+  outline: none;
+  background-color: transparent;
 
-	width: 164px;
-	display: flex;
-	align-items: center;
-	&:hover {
-		text-decoration: underline;
-		cursor: pointer;
-	}
+  width: 164px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 
 .NavSubMenuGroupButtonList {
-	overflow: auto;
-	height: 200px;
-	padding: 10px;
-	border-left: 2px solid #0a8b98;
-	border-top: 2px solid #0a8b98;
-	border-right: 2px solid #0a8b98;
-	color: white;
-	background-color: black;
+  position: absolute;
+  width: 174px;
+  bottom: 60px;
+  overflow: auto;
+  height: 200px;
+  padding: 10px;
+  border-left: 2px solid #0a8b98;
+  border-top: 2px solid #0a8b98;
+  border-right: 2px solid #0a8b98;
+  color: white;
+  background-color: black;
 }
 .ButtonGroup {
-	height: auto;
-	width: 174px;
+  height: auto;
+  width: 174px;
 }
 
 .FilterText {
-	color: #fff;
+  color: #fff;
 
-	font-size: 18px;
+  font-size: 18px;
 
-	padding: 20px 20px 6px 20px;
+  //   padding: 20px 20px 6px 20px;
 }
 
 .YearElement {
-	&:hover {
-		text-decoration: underline;
-		cursor: pointer;
-	}
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 
 .NavSearchButton {
-	background-color: #00a0b0;
-	border: 1px solid #0098a7;
-	border-radius: 3px;
-	font-size: 14px;
-	font-weight: bold;
-	color: #fff;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	padding: 11px 10px 11px 10px;
+  background-color: #00a0b0;
+  border: 1px solid #0098a7;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 11px 10px 11px 10px;
 }
 .hidden {
-	display: none;
+  display: none;
 }
 .visible {
-	display: block;
+  display: block;
 }

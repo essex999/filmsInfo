@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import { API_KEY } from '../consts'
+import { API_KEY } from '../../consts'
+ 
 const BASE_URL = 'https://api.kinopoisk.dev/'
 
 export const useGetMovies = () => {
@@ -34,20 +35,3 @@ export const useGetMovies = () => {
 		isSuccess,
 	}
 }
-
-// export const useGetMovies = () => {
-// 	const {} = useMutation(['getMovie'], async (year, genre) => {
-// 	const response = await axios.get(`${BASE_URL}v1.4/movie`, {
-// 		params: {
-// 			typeNumber: typeNumber,
-// 			'genres.name': genre.toLowerCase(),
-// 			year: year,
-// 			page: page,
-// 		},
-// 		headers: { 'X-API-KEY': API_KEY },
-// 	})
-// 	return response
-// })
-
-// 	return { data }
-// }
