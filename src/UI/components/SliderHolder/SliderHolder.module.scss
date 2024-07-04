@@ -1,9 +1,11 @@
 .sliderWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: rgba(29, 53, 87, 0.45);
+	padding: 20px 0px 20px 0px;
 }
 
 .sliderContainer {
-  width: 90%;
+	width: 90%;
 }
