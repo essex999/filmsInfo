@@ -1,17 +1,34 @@
 .img {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 .h {
-	padding: 0;
-	margin: 0;
-	color: white;
+  padding: 0;
+  margin: 0;
+  color: white;
 }
 .text {
-	padding: 0;
-	margin: 0;
-	color: white;
+  padding: 0;
+  margin: 0;
+  color: white;
 }
 .imgElement {
-	border: 3px solid white;
+  border: 3px solid white;
+}
+.skeleton {
+  border: 1px solid black;
+  height: 210px;
+  width: 120px;
+}
+
+.sliderElement {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sliderContent {
+  height: 90%;
+  width: 90%;
 }

@@ -19,7 +19,7 @@ export const useGetMovies = () => {
         },
         headers: { "X-API-KEY": API_KEY },
       });
-      return response;
+      return response.data;
     },
   });
 

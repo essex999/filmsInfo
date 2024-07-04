@@ -29,7 +29,7 @@ export default function SliderHolder() {
     infinite: true,
 
     slidesToShow: 8,
-    slidesToScroll: 2,
+    slidesToScroll: 4,
     autoplay: true,
     speed: 400, //milliseconds
     autoplaySpeed: 5500, //milliseconds
@@ -40,14 +40,16 @@ export default function SliderHolder() {
     <div className={styles.sliderWrapper}>
       <div className={`${"slider-container"} ${styles.sliderContainer}`}>
         <Slider {...settings} className={styles.slider}>
-          {mockData.map((el, index) => (
-            <div key={index}>
-              <div className={styles.sliderElement}>
-                <div className={styles.sliderContent}>
-                  <SliderElement />
-                </div>
-              </div>
-            </div>
+          {(data ? data.docs : []).map((el, index) => (
+            <SliderElement
+              key={index} //number
+              name={el.name} //string
+              alternativeName={el.alternativeName} //string
+              year={el.year} //number
+              countries={el.countries} //array
+              genres={el.genres} //array
+              poster={el.poster} //object   previewUrl   url
+            />
           ))}
         </Slider>
       </div>
