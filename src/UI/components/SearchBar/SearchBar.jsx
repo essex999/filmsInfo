@@ -1,10 +1,11 @@
-import { useState } from "react"
-import IconArrowDropDownLine from "../../../assets/IconComponents/arrowElectronIcon.js"
-import { categories } from "../../../consts.js"
- 
-import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie.js'
-import { BarContentPopUp } from "../BarContentPopUp/BarContentPopUp.jsx"
-import styles from "./SearchBar.module.scss"
+import { useEffect, useState } from "react";
+import IconArrowDropDownLine from "../../../assets/IconComponents/arrowElectronIcon.js";
+import { categories } from "../../../consts.js";
+
+import { useSearchMovies } from "../../../query/moviesApi/useSearchMovie.js";
+import { BarContentPopUp } from "../BarContentPopUp/BarContentPopUp.jsx";
+import styles from "./SearchBar.module.scss";
+import SearchIcon from "../../../assets/IconComponents/searchIcon.js";
 export const SearchBar = () => {
   const [isToggle, setToggle] = useState(true);
   const [onFocusData, setOnFocusData] = useState({});
@@ -15,9 +16,9 @@ export const SearchBar = () => {
 
   const { data, refetch, isLoading } = useSearchMovies({ query: inputValue });
 
-
-
-	
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <div
       className={styles.HeaderMain}
@@ -50,6 +51,7 @@ export const SearchBar = () => {
         </div>
 
         <form
+          className={styles.form}
           onSubmit={(e) => {
             e.preventDefault();
             refetch();
@@ -69,6 +71,9 @@ export const SearchBar = () => {
             type="text"
             placeholder={isToggle ? placeholderValue : ""}
           />
+          <button type="submit">
+            <SearchIcon className={styles.searchIcon} />
+          </button>
         </form>
       </div>
       <BarContentPopUp
