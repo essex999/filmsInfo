@@ -1,13 +1,13 @@
 .sliderElement {
   height: auto;
-  width: 180px;
+  width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .sliderContent {
   height: 90%;
-  width: 90%;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -21,6 +21,7 @@
   padding: 0;
   margin: 0;
   color: white;
+  text-align: center;
 }
 .text {
   padding: 0;
@@ -34,8 +35,7 @@
 }
 .imgElement {
   border: 3px solid white;
-  height: 154px;
-  width: 90px;
+  width: 100%;
 }
 .skeleton {
   border: 1px solid black;
