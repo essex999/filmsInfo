@@ -11,7 +11,7 @@ export const SearchBar = () => {
 	const [onFocusData, setOnFocusData] = useState({})
 	const placeholderValue = 'Поиск Фильмов и Сериалов'
 	const [typeNumber, setTypeNumber] = useState(0)
-	const [isNavSubMenu, setIsNavSubMenu] = useState(true)
+	const [isNavSubMenu, setIsNavSubMenu] = useState(false)
 	const [inputValue, seInputValue] = useState('')
 
 	const { data, refetch, isLoading } = useSearchMovies({ query: inputValue })
