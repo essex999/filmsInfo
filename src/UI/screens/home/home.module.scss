@@ -1,26 +1,32 @@
 .dataContainer {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  justify-items: center;
-  row-gap: 20px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	justify-items: center;
+	row-gap: 20px;
 }
 
 .wrapper {
-  margin-top: 2vh;
-  width: 60vw;
-  min-height: 98vh;
-  background-color: #415a77;
+	margin-top: 2vh;
+	width: 950px;
+	min-height: 98vh;
+	background-color: #415a77;
 }
 
 button {
-  padding: 0;
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  cursor: pointer;
+	padding: 0;
+	border: none;
+	font: inherit;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+}
+.paginationWrapper {
+	display: flex;
+	justify-content: center;
+	position: static;
+	padding: 40px;
 }
