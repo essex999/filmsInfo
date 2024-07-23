@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import IconArrowDropDownLine from '../../../assets/IconComponents/arrowElectronIcon.js'
 import { categories } from '../../../consts.js'
 
+import { useNavigate } from 'react-router-dom'
 import SearchIcon from '../../../assets/IconComponents/searchIcon.js'
 import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie.js'
 import { BarContentPopUp } from '../BarContentPopUp/BarContentPopUp.jsx'
 import styles from './SearchBar.module.scss'
 export const SearchBar = () => {
+	const navigate = useNavigate()
 	const [isToggle, setToggle] = useState(true)
 	const [onFocusData, setOnFocusData] = useState({})
 	const placeholderValue = 'Поиск Фильмов и Сериалов'
@@ -14,10 +16,15 @@ export const SearchBar = () => {
 	const [isNavSubMenu, setIsNavSubMenu] = useState(false)
 	const [inputValue, seInputValue] = useState('')
 
-	const { data, refetch, isLoading } = useSearchMovies({ query: inputValue })
+	const { data, refetch, isLoading, isFetching } = useSearchMovies({
+		query: inputValue,
+	})
 
 	useEffect(() => {
-		console.log(data)
+		console.log(data === undefined)
+		if (data !== undefined) {
+			navigate('/search/1')
+		}
 	}, [data])
 	return (
 		<div
