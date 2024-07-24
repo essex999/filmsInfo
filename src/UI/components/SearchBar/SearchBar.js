@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react'
 import IconArrowDropDownLine from '../../../assets/IconComponents/arrowElectronIcon.js'
 import { categories } from '../../../consts.js'
 
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import SearchIcon from '../../../assets/IconComponents/searchIcon.js'
 import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie.js'
+import { setSearchTextContent } from '../../../redux/slicers/searchMovieParamsSlicer.js'
 import { BarContentPopUp } from '../BarContentPopUp/BarContentPopUp.jsx'
 import styles from './SearchBar.module.scss'
 export const SearchBar = () => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [isToggle, setToggle] = useState(true)
 	const [onFocusData, setOnFocusData] = useState({})
 	const placeholderValue = 'Поиск Фильмов и Сериалов'
@@ -18,10 +21,11 @@ export const SearchBar = () => {
 
 	const { data, refetch, isLoading, isFetching } = useSearchMovies({
 		query: inputValue,
+		page: 1,
 	})
 
 	useEffect(() => {
-		console.log(data === undefined)
+		console.log(data)
 		if (data !== undefined) {
 			navigate('/search/1')
 		}
@@ -68,6 +72,7 @@ export const SearchBar = () => {
 						className={styles.HeaderInput}
 						onChange={e => {
 							seInputValue(e.target.value)
+							dispatch(setSearchTextContent(e.target.value))
 						}}
 						onFocus={() => {
 							setToggle(!isToggle)

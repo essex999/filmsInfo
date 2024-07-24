@@ -2,7 +2,6 @@ import { Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMainPageData } from '../../../query/moviesApi/getMainPageData'
-import { Header } from '../../components/Header/Header'
 import { MovieCard } from '../../components/MovieCard/MovieCard'
 import { SearchBar } from '../../components/SearchBar/SearchBar'
 import SliderHolder from '../../components/SliderHolder/SliderHolder'
@@ -14,12 +13,6 @@ export const Home = () => {
 
 	const [currentPage, setCurrentPage] = useState(1)
 
-	useEffect(() => {
-		if (pageNumber) {
-			setCurrentPage(parseInt(pageNumber))
-		}
-	}, [])
-
 	const { data, refetch, isSuccess } = useMainPageData(currentPage)
 
 	const scrollToTop = () => {
@@ -28,12 +21,23 @@ export const Home = () => {
 			behavior: 'smooth',
 		})
 	}
+
+	useEffect(() => {
+		if (pageNumber !== undefined) {
+			setCurrentPage(parseInt(pageNumber))
+			scrollToTop()
+		}
+	}, [pageNumber])
+
 	return (
 		<div className={styles.wrapper}>
-			<Header />
+			{/* <Header /> */}
 			<SearchBar />
 			<SliderHolder></SliderHolder>
-			<button onClick={refetch}>Siuda</button>
+
+			<h1 className={styles.title} onClick={refetch}>
+				Топ 250 Фильмов
+			</h1>
 			<div className={styles.dataContainer}>
 				{(data ? data.docs : []).map((el, index) => (
 					<MovieCard
@@ -56,10 +60,10 @@ export const Home = () => {
 						setCurrentPage(value)
 
 						navigate(`/home/${value}`)
-						scrollToTop()
 					}}
 				/>
 			)}
+			<div className={styles.footer}>Footer</div>
 		</div>
 	)
 }

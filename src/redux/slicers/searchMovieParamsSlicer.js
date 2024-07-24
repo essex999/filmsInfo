@@ -1,23 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-	genre: '',
-	year: '',
+	searchTextContent: '',
 }
 
 export const searchMovieParams = createSlice({
-	name: 'searchMovieParams',
+	name: 'searchParams',
 	initialState,
 	reducers: {
-		setGenreParam: (state, action) => {
-			return { ...state, genre: action.payload }
-		},
-		setYearParam: (state, action) => {
-			return { ...state, year: action.payload }
+		setSearchTextContent: (state, action) => {
+			state.searchTextContent = action.payload
 		},
 	},
 })
 
-export const { setGenreParam, setYearParam } = searchMovieParams.actions
+export const { setSearchTextContent } = searchMovieParams.actions
 
 export default searchMovieParams.reducer

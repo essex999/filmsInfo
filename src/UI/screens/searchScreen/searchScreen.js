@@ -1,6 +1,7 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSearchedMoviesData } from '../../../hooks/useSearchedMoviesData'
 import { Header } from '../../components/Header/Header'
 import { SearchBar } from '../../components/SearchBar/SearchBar'
 import styles from './searchScreen.module.scss'
@@ -11,11 +12,15 @@ export const SearchScreen = () => {
 
 	const [currentPage, setCurrentPage] = useState(1)
 
-	useEffect(() => {
-		if (pageNumber) {
-			setCurrentPage(parseInt(pageNumber))
-		}
-	}, [])
+	const inputTextContent = useSelector(
+		state => state.searchParams.searchTextContent
+	)
+
+	// useEffect(() => {
+	// 	if (pageNumber) {
+	// 		setCurrentPage(parseInt(pageNumber))
+	// 	}
+	// }, [])
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -23,10 +28,14 @@ export const SearchScreen = () => {
 			behavior: 'smooth',
 		})
 	}
-	const queryClient = useQueryClient()
+	const { getSearchedMoviesData } = useSearchedMoviesData()
 
-	const data = queryClient.getQueryData(['searchedMoviesData'])
-	console.log(data)
+	const data = getSearchedMoviesData(inputTextContent, currentPage)
+
+	useEffect(() => {
+		console.log(data)
+	}, [data])
+
 	return (
 		<div className={styles.wrapper}>
 			<Header />
