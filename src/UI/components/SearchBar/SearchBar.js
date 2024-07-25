@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import IconArrowDropDownLine from '../../../assets/IconComponents/arrowElectronIcon.js'
 import { categories } from '../../../consts.js'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import SearchIcon from '../../../assets/IconComponents/searchIcon.js'
 import { setSearchTextContent } from '../../../redux/slicers/searchMovieParamsSlicer.js'
@@ -20,7 +20,13 @@ export const SearchBar = ({ setTrigger }) => {
 	const pathname = useLocation().pathname
 
 	const searchPage = pathname.split('/').find(el => el === 'search')
+	const inputTextContent = useSelector(
+		state => state.searchParams.searchTextContent
+	)
 
+	useEffect(() => {
+		setTextContent(inputTextContent)
+	}, [])
 	return (
 		<div
 			className={styles.HeaderMain}
@@ -70,6 +76,7 @@ export const SearchBar = ({ setTrigger }) => {
 				>
 					<input
 						className={styles.HeaderInput}
+						value={textcontent}
 						onChange={e => {
 							setTextContent(e.target.value)
 						}}
