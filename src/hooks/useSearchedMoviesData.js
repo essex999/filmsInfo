@@ -4,11 +4,13 @@ export const useSearchedMoviesData = () => {
 	const queryClient = useQueryClient()
 
 	const getSearchedMoviesData = (query, page) => {
-		return queryClient.getQueryData([
+		const data = queryClient.getQueryData([
 			'searchedMoviesData',
 			{ query: query, page: page },
 		])
+		return data
 	}
-
-	return { getSearchedMoviesData }
+	if (getSearchedMoviesData !== undefined) {
+		return { getSearchedMoviesData }
+	}
 }

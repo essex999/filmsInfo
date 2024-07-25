@@ -1,8 +1,10 @@
+import { Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useSearchedMoviesData } from '../../../hooks/useSearchedMoviesData'
+import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie'
 import { Header } from '../../components/Header/Header'
+import { MovieCard } from '../../components/MovieCard/MovieCard'
 import { SearchBar } from '../../components/SearchBar/SearchBar'
 import styles from './searchScreen.module.scss'
 export const SearchScreen = () => {
@@ -11,16 +13,22 @@ export const SearchScreen = () => {
 	const { pageNumber } = useParams()
 
 	const [currentPage, setCurrentPage] = useState(1)
-
+	const [trigger, setTrigger] = useState(0)
 	const inputTextContent = useSelector(
 		state => state.searchParams.searchTextContent
 	)
 
-	// useEffect(() => {
-	// 	if (pageNumber) {
-	// 		setCurrentPage(parseInt(pageNumber))
-	// 	}
-	// }, [])
+	const { data, refetch, isLoading, isFetching } = useSearchMovies({
+		query: inputTextContent,
+		page: currentPage,
+	})
+
+	useEffect(() => {
+		if (pageNumber && pageNumber !== 1 && inputTextContent !== '') {
+			setCurrentPage(parseInt(pageNumber))
+			refetch()
+		}
+	}, [pageNumber])
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -28,20 +36,17 @@ export const SearchScreen = () => {
 			behavior: 'smooth',
 		})
 	}
-	const { getSearchedMoviesData } = useSearchedMoviesData()
-
-	const data = getSearchedMoviesData(inputTextContent, currentPage)
 
 	useEffect(() => {
-		console.log(data)
-	}, [data])
+		refetch()
+	}, [trigger])
 
 	return (
 		<div className={styles.wrapper}>
 			<Header />
-			<SearchBar />
+			<SearchBar setTrigger={setTrigger} />
 
-			{/* <div className={styles.dataContainer}>
+			<div className={styles.dataContainer}>
 				{(data ? data.docs : []).map((el, index) => (
 					<MovieCard
 						key={index}
@@ -61,12 +66,11 @@ export const SearchScreen = () => {
 					page={currentPage}
 					onChange={(e, value) => {
 						setCurrentPage(value)
-
-						navigate(`/home/${value}`)
+						navigate(`/search/${value}`)
 						scrollToTop()
 					}}
 				/>
-			)} */}
+			)}
 		</div>
 	)
 }

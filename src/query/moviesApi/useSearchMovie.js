@@ -12,10 +12,10 @@ export const useSearchMovies = params => {
 		retry: 0,
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}v1.4/movie/search`, {
-				params: { ...params },
+				params: { ...params, limit: 16 },
 				headers: { 'X-API-KEY': API_KEY },
 			})
-			return response
+			return response.data
 		},
 	})
 

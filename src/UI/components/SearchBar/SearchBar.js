@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import IconArrowDropDownLine from '../../../assets/IconComponents/arrowElectronIcon.js'
 import { categories } from '../../../consts.js'
 
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import SearchIcon from '../../../assets/IconComponents/searchIcon.js'
-import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie.js'
 import { setSearchTextContent } from '../../../redux/slicers/searchMovieParamsSlicer.js'
 import { BarContentPopUp } from '../BarContentPopUp/BarContentPopUp.jsx'
 import styles from './SearchBar.module.scss'
-export const SearchBar = () => {
+export const SearchBar = ({ setTrigger }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [isToggle, setToggle] = useState(true)
@@ -17,19 +16,11 @@ export const SearchBar = () => {
 	const placeholderValue = 'Поиск Фильмов и Сериалов'
 	const [typeNumber, setTypeNumber] = useState(0)
 	const [isNavSubMenu, setIsNavSubMenu] = useState(false)
-	const [inputValue, seInputValue] = useState('')
+	const [textcontent, setTextContent] = useState('')
+	const pathname = useLocation().pathname
 
-	const { data, refetch, isLoading, isFetching } = useSearchMovies({
-		query: inputValue,
-		page: 1,
-	})
+	const searchPage = pathname.split('/').find(el => el === 'search')
 
-	useEffect(() => {
-		console.log(data)
-		if (data !== undefined) {
-			navigate('/search/1')
-		}
-	}, [data])
 	return (
 		<div
 			className={styles.HeaderMain}
@@ -65,14 +56,22 @@ export const SearchBar = () => {
 					className={styles.form}
 					onSubmit={e => {
 						e.preventDefault()
-						refetch()
+
+						dispatch(setSearchTextContent(textcontent))
+
+						if (!searchPage) {
+							navigate('/search/1')
+						}
+
+						if (setTrigger) {
+							setTrigger(Math.random())
+						}
 					}}
 				>
 					<input
 						className={styles.HeaderInput}
 						onChange={e => {
-							seInputValue(e.target.value)
-							dispatch(setSearchTextContent(e.target.value))
+							setTextContent(e.target.value)
 						}}
 						onFocus={() => {
 							setToggle(!isToggle)
