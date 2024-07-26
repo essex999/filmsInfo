@@ -2,23 +2,31 @@ import { useEffect, useState } from 'react'
 import IconArrowDropDownLine from '../../../assets/IconComponents/arrowElectronIcon.js'
 import { categories } from '../../../consts.js'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 import SearchIcon from '../../../assets/IconComponents/searchIcon.js'
-import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie.js'
+import { setSearchTextContent } from '../../../redux/slicers/searchMovieParamsSlicer.js'
 import { BarContentPopUp } from '../BarContentPopUp/BarContentPopUp.jsx'
 import styles from './SearchBar.module.scss'
-export const SearchBar = () => {
+export const SearchBar = ({ setTrigger }) => {
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [isToggle, setToggle] = useState(true)
 	const [onFocusData, setOnFocusData] = useState({})
 	const placeholderValue = 'Поиск Фильмов и Сериалов'
 	const [typeNumber, setTypeNumber] = useState(0)
-	const [isNavSubMenu, setIsNavSubMenu] = useState(true)
-	const [inputValue, seInputValue] = useState('')
+	const [isNavSubMenu, setIsNavSubMenu] = useState(false)
+	const [textcontent, setTextContent] = useState('')
+	const pathname = useLocation().pathname
 
-	const { data, refetch, isLoading } = useSearchMovies({ query: inputValue })
+	const searchPage = pathname.split('/').find(el => el === 'search')
+	const inputTextContent = useSelector(
+		state => state.searchParams.searchTextContent
+	)
 
 	useEffect(() => {
-		console.log(data)
-	}, [data])
+		setTextContent(inputTextContent)
+	}, [])
 	return (
 		<div
 			className={styles.HeaderMain}
@@ -54,13 +62,23 @@ export const SearchBar = () => {
 					className={styles.form}
 					onSubmit={e => {
 						e.preventDefault()
-						refetch()
+
+						dispatch(setSearchTextContent(textcontent))
+
+						if (!searchPage) {
+							navigate('/search/1')
+						}
+
+						if (setTrigger) {
+							setTrigger(Math.random())
+						}
 					}}
 				>
 					<input
 						className={styles.HeaderInput}
+						value={textcontent}
 						onChange={e => {
-							seInputValue(e.target.value)
+							setTextContent(e.target.value)
 						}}
 						onFocus={() => {
 							setToggle(!isToggle)

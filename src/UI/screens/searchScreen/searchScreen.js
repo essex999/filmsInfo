@@ -1,19 +1,34 @@
 import { Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useMainPageData } from '../../../query/moviesApi/getMainPageData'
+import { useSearchMovies } from '../../../query/moviesApi/useSearchMovie'
+import { Header } from '../../components/Header/Header'
 import { MovieCard } from '../../components/MovieCard/MovieCard'
 import { SearchBar } from '../../components/SearchBar/SearchBar'
-import SliderHolder from '../../components/SliderHolder/SliderHolder'
-import styles from './home.module.scss'
-export const Home = () => {
+import styles from './searchScreen.module.scss'
+export const SearchScreen = () => {
 	const navigate = useNavigate()
 
 	const { pageNumber } = useParams()
 
 	const [currentPage, setCurrentPage] = useState(1)
+	const [trigger, setTrigger] = useState(0)
+	const inputTextContent = useSelector(
+		state => state.searchParams.searchTextContent
+	)
 
-	const { data, refetch, isSuccess } = useMainPageData(currentPage)
+	const { data, refetch, isLoading, isFetching } = useSearchMovies({
+		query: inputTextContent,
+		page: currentPage,
+	})
+
+	useEffect(() => {
+		if (pageNumber && pageNumber !== 1 && inputTextContent !== '') {
+			setCurrentPage(parseInt(pageNumber))
+			refetch()
+		}
+	}, [pageNumber])
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -23,21 +38,14 @@ export const Home = () => {
 	}
 
 	useEffect(() => {
-		if (pageNumber !== undefined) {
-			setCurrentPage(parseInt(pageNumber))
-			scrollToTop()
-		}
-	}, [pageNumber])
+		refetch()
+	}, [trigger])
 
 	return (
 		<div className={styles.wrapper}>
-			{/* <Header /> */}
-			<SearchBar />
-			<SliderHolder></SliderHolder>
+			<Header />
+			<SearchBar setTrigger={setTrigger} />
 
-			<h1 className={styles.title} onClick={refetch}>
-				Топ 250 Фильмов
-			</h1>
 			<div className={styles.dataContainer}>
 				{(data ? data.docs : []).map((el, index) => (
 					<MovieCard
@@ -58,12 +66,11 @@ export const Home = () => {
 					page={currentPage}
 					onChange={(e, value) => {
 						setCurrentPage(value)
-
-						navigate(`/home/${value}`)
+						navigate(`/search/${value}`)
+						scrollToTop()
 					}}
 				/>
 			)}
-			<div className={styles.footer}>Footer</div>
 		</div>
 	)
 }
